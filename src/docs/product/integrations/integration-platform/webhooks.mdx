@@ -30,6 +30,7 @@ This is the resource that triggered the action. The action will be in the payloa
 - installation
 - event_alert (payload will be a serialized event)
 - issue
+- metric_alert
 
 **`Sentry-Hook-Signature`**
 
@@ -387,6 +388,70 @@ All webhook requests have some common elements.
       "web_url": "https://sentry.io/organizations/test-org/issues/1117540176/events/e4874d664c3540c1a32eab185f12c5ab/"
     },
     "triggered_rule": "Very Important Alert Rule!"
+  },
+  "installation": {
+    "uuid": "a8e5d37a-696c-4c54-adb5-b3f28d64c7de"
+  }
+}
+```
+
+### Metric Alerts
+
+`'Sentry-Hook-Resource': 'metric_alert'`
+
+**Attributes**
+
+**action**
+
+- type: string
+- description: will always be `triggered`
+
+**data['incident']**
+
+- type: object
+- description: the incident that triggered the alert rule
+
+**data['incident']['started_at']**
+
+- type: string
+- description: TODO
+
+**data['incident']['status']**
+
+- type: string
+- description: TODO
+
+**data['incident']['text']**
+
+- type: string
+- description: TODO
+
+**data['incident']['title']**
+
+- type: string
+- description: TODO
+
+**data['incident']['url']**
+
+- type: string
+- description: the api url for the incident
+
+#### Payload
+
+```json
+{
+  "action": "triggered",
+  "actor": {
+    "id": "sentry",
+    "name": "Sentry",
+    "type": "application"
+  },
+  "data": {
+    "status": "Resolved",
+    "title": "Resolved: Honest Seal",
+    "text": "1000 events in the last 10 minutes\nFilter: level:error",
+    "ts": "2020-09-08T19:48:54.123531Z",
+    "title_link": "http://sentry.io/api/0/organizations/baz/alerts/1/",
   },
   "installation": {
     "uuid": "a8e5d37a-696c-4c54-adb5-b3f28d64c7de"
