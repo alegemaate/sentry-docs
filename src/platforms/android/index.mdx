@@ -764,3 +764,13 @@ Example of uploading all your .so files:
 sentry-cli login
 sentry-cli upload-dif -o {YOUR ORGANISATION} -p {PROJECT} build/intermediates/merged_native_libs/{buildVariant}
 ```
+
+Due to current limitations in how `sentry-native` works, it cannot yet identify native libraries loaded directly from `.apk` files.
+This functionality is [enabled by default](https://developer.android.com/studio/releases/gradle-plugin#extractNativeLibs)
+when using a recent Android Gradle Plugin, and needs to be disabled with the following configuration option:
+
+```xml
+<application
+    android:extractNativeLibs="true">
+</application>
+```
